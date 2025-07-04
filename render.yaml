@@ -1,6 +1,6 @@
 databases:
   - name: database
-    plan: starter
+    plan: free
     postgresMajorVersion: 16
 
 services:
@@ -8,7 +8,7 @@ services:
   - type: web
     name: evershop-app
     env: node
-    plan: starter
+    plan: free
     branch: main # or your default branch
     healthCheckPath: / 
     buildCommand: "npm install && npm run compile && npm run build"
