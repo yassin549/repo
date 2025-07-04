@@ -9,7 +9,7 @@ services:
     name: evershop-app
     env: node
     plan: free
-    branch: main # or your default branch
+    branch: master
     healthCheckPath: / 
     buildCommand: "npm install && npm run compile && npm run build"
     startCommand: "npm run start"
