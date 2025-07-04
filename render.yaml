@@ -1,6 +1,6 @@
 services:
   # A PostgreSQL database
-  - type: psql
+  - type: postgres
     name: database
     plan: starter
     postgresMajorVersion: 16
@@ -17,27 +17,27 @@ services:
     envVars:
       - key: DB_HOST
         fromService:
-          type: psql
+          type: postgres
           name: database
           property: host
       - key: DB_PORT
         fromService:
-          type: psql
+          type: postgres
           name: database
           property: port
       - key: DB_USER
         fromService:
-          type: psql
+          type: postgres
           name: database
           property: user
       - key: DB_PASSWORD
         fromService:
-          type: psql
+          type: postgres
           name: database
           property: password
       - key: DB_NAME
         fromService:
-          type: psql
+          type: postgres
           name: database
           property: database
       # Admin credentials as requested
