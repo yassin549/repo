@@ -34,8 +34,9 @@ services:
         fromDatabase:
           name: database
           property: database
-      # Admin credentials as requested
-      - key: ADMIN_EMAIL
-        value: khoualdiyassin26@gmail.com
-      - key: ADMIN_PASSWORD
-        value: admin123
+
+  # Job to create the admin user. This runs once after the first successful deploy.
+  - type: job
+    name: setup-admin
+    plan: free
+    startCommand: "npm run user:create -w @evershop/evershop -- --name 'Admin' --email 'khoualdiyassin26@gmail.com' --password 'admin123'"
