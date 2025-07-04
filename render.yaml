@@ -11,7 +11,7 @@ services:
     plan: free
     branch: master
     healthCheckPath: / 
-    buildCommand: "npm install && npm run compile && npm run build"
+    buildCommand: "npm install && npm run compile -w @evershop/postgres-query-builder && npm run compile && npm run build"
     startCommand: "npm run start"
     envVars:
       - key: DB_HOST
