@@ -4,10 +4,9 @@ databases:
     postgresMajorVersion: 16
 
 services:
-  # The Evershop web service
   - type: web
     name: evershop-app
-    env: node
+    runtime: node     # use `runtime` instead of the deprecated `env`
     plan: free
     branch: master
     healthCheckPath: /
@@ -16,13 +15,13 @@ services:
       npm run compile -w @evershop/postgres-query-builder &&
       npm run compile &&
       npm run build
-    startCommand: npm run start
-    releaseCommand: >       # ← runs once, right after deploy
+    preDeployCommand: >            # ← runs after build, before start
       npm run user:create \
         -w @evershop/evershop \
         --name 'Admin' \
         --email 'khoualdiyassin26@gmail.com' \
         --password 'admin123'
+    startCommand: npm run start
     envVars:
       - key: DB_HOST
         fromDatabase:
