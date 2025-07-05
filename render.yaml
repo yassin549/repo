@@ -44,10 +44,18 @@ services:
           name: database
           property: database
 
-      # Admin‑seeding credentials
-      - key: ADMIN_NAME
-        value: "Admin"
+      # This key is used by Render to automatically set the environment variable for the web service.
+      # For a new service, you should also set this to a unique value in the Render dashboard.
+      - key: PORT
+        value: 3000
+
+      # Set the Node.js environment to production
+      - key: NODE_ENV
+        value: production
+
+      # Admin-seeding credentials.
+      # IMPORTANT: Set the values for these keys as 'Secrets' in the Render.com dashboard.
+      # Do not hardcode them here.
+      - key: ADMIN_FULLNAME
       - key: ADMIN_EMAIL
-        value: "khoualdiyassin26@gmail.com"
       - key: ADMIN_PASSWORD
-        value: "admin123"
