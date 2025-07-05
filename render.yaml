@@ -10,9 +10,19 @@ services:
     env: node
     plan: free
     branch: master
-    healthCheckPath: / 
-    buildCommand: "npm install && npm run compile -w @evershop/postgres-query-builder && npm run compile && npm run build"
-    startCommand: "npm run start"
+    healthCheckPath: /
+    buildCommand: >
+      npm install &&
+      npm run compile -w @evershop/postgres-query-builder &&
+      npm run compile &&
+      npm run build
+    startCommand: npm run start
+    releaseCommand: >       # ← runs once, right after deploy
+      npm run user:create \
+        -w @evershop/evershop \
+        --name 'Admin' \
+        --email 'khoualdiyassin26@gmail.com' \
+        --password 'admin123'
     envVars:
       - key: DB_HOST
         fromDatabase:
@@ -34,9 +44,3 @@ services:
         fromDatabase:
           name: database
           property: database
-
-  # Job to create the admin user. This runs once after the first successful deploy.
-  - type: job
-    name: setup-admin
-    plan: free
-    startCommand: "npm run user:create -w @evershop/evershop -- --name 'Admin' --email 'khoualdiyassin26@gmail.com' --password 'admin123'"
