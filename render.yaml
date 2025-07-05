@@ -53,9 +53,6 @@ services:
       - key: NODE_ENV
         value: production
 
-      # Admin-seeding credentials.
-      # IMPORTANT: Set the values for these keys as 'Secrets' in the Render.com dashboard.
-      # Do not hardcode them here.
-      - key: ADMIN_FULLNAME
-      - key: ADMIN_EMAIL
-      - key: ADMIN_PASSWORD
+      # Admin-seeding credentials (ADMIN_FULLNAME, ADMIN_EMAIL, ADMIN_PASSWORD)
+      # have been removed from this file.
+      # IMPORTANT: You MUST set them as secret environment variables in the Render.com dashboard for your service.
