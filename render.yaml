@@ -19,6 +19,7 @@ services:
       npm install &&
       npm run compile -w @evershop/postgres-query-builder &&
       npm run compile &&
+      npm run setup &&
       npm run build
     startCommand: npm run start
     envVars:
