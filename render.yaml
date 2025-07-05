@@ -1,3 +1,8 @@
+# render.yaml
+# -------------
+# Defines one database + one web service on the Free plan.
+# We’ll pass ADMIN_* via envVars and let your app create the Admin if it’s missing.
+
 databases:
   - name: database
     plan: free
@@ -6,7 +11,7 @@ databases:
 services:
   - type: web
     name: evershop-app
-    runtime: node     # use `runtime` instead of the deprecated `env`
+    runtime: node         # “env: node” is deprecated; use runtime
     plan: free
     branch: master
     healthCheckPath: /
@@ -15,14 +20,9 @@ services:
       npm run compile -w @evershop/postgres-query-builder &&
       npm run compile &&
       npm run build
-    preDeployCommand: >            # ← runs after build, before start
-      npm run user:create \
-        -w @evershop/evershop \
-        --name 'Admin' \
-        --email 'khoualdiyassin26@gmail.com' \
-        --password 'admin123'
     startCommand: npm run start
     envVars:
+      # Database connection
       - key: DB_HOST
         fromDatabase:
           name: database
@@ -43,3 +43,11 @@ services:
         fromDatabase:
           name: database
           property: database
+
+      # Admin‑seeding credentials
+      - key: ADMIN_NAME
+        value: "Admin"
+      - key: ADMIN_EMAIL
+        value: "khoualdiyassin26@gmail.com"
+      - key: ADMIN_PASSWORD
+        value: "admin123"
