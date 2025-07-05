@@ -20,6 +20,7 @@ import { hashPassword } from '../../lib/util/passwordHelper.js';
 // If you are using docker, do not run this command. Instead, you should set the environment variables in the docker-compose.yml file and run `npm run start`
 // This command means for the developer who want to install the system on their local machine.
 async function install() {
+  /* This check prevents the setup script from running on Render. We comment it out.
   // Check if the env for database is set
   if (process.env.DB_HOST) {
     error(
@@ -27,6 +28,7 @@ async function install() {
     );
     process.exit(0);
   }
+  */
 
   var db;
 
