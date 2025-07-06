@@ -10,25 +10,14 @@ export default async (request, response, delegate, next) => {
     const message = translate('Invalid email or password');
     const { body } = request;
     const { email, password } = body;
-    await request.loginUserWithEmail(email, password, (error) => {
-      if (error) {
-        response.status(INTERNAL_SERVER_ERROR);
-        response.json({
-          error: {
-            status: INTERNAL_SERVER_ERROR,
-            message
-          }
-        });
-      } else {
-        response.status(OK);
-        response.$body = {
-          data: {
-            sid: request.sessionID
-          }
-        };
-        next();
+    await request.loginUserWithEmail(email, password);
+    response.status(OK);
+    response.$body = {
+      data: {
+        sid: request.sessionID
       }
-    });
+    };
+    next();
   } catch (error) {
     response.status(INVALID_PAYLOAD).json({
       error: {

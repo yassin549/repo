@@ -15,10 +15,16 @@ async function loginUserWithEmail(email, password) {
     .where('email', 'ILIKE', userEmail)
     .and('status', '=', 1)
     .load(pool);
-  const result = comparePassword(password, user ? user.password : '');
-  if (!user || !result) {
+
+  if (!user) {
     throw new Error('Invalid email or password');
   }
+
+  const result = await comparePassword(password, user.password);
+  if (!result) {
+    throw new Error('Invalid email or password');
+  }
+
   this.session.userID = user.admin_user_id;
   // Delete the password field
   delete user.password;
