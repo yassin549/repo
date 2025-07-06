@@ -20,7 +20,7 @@ async function loginUserWithEmail(email, password) {
     throw new Error('Invalid email or password');
   }
 
-  const result = await comparePassword(password, user.password);
+  const result = comparePassword(password, user.password);
   if (!result) {
     throw new Error('Invalid email or password');
   }

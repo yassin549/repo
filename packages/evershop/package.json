@@ -41,6 +41,10 @@
       "import": "./dist/lib/log/logger.js",
       "types": "./dist/lib/log/logger.d.ts"
     },
+    "./lib/postgres/connection": {
+      "import": "./dist/lib/postgres/connection.js",
+      "types": "./dist/lib/postgres/connection.d.ts"
+    },
     "./lib/router": {
       "import": "./dist/lib/router/index.js",
       "types": "./dist/lib/router/index.d.ts"
